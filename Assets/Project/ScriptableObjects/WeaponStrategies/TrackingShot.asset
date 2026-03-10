@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4213ba2a4d14c4ca2dd79fb8fac49c, type: 3}
+  m_Name: TrackingShot
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.TrackingShot
+  damage: 10
+  attackRate: 0.5
+  projectileSpeed: 2.5
+  projectileLifetime: 4
+  projectilePrefab: {fileID: 2375249433010735738, guid: 89bba1fb4ba71394a9c92cbed2115d5f, type: 3}
+  trackingSpeed: 5
