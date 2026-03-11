@@ -14,7 +14,7 @@ namespace DragonWorm {
         float spawnTimer;
         int enemiesSpawned;
 
-        private void OnValidate() {
+        private void Awake() {
             splines = new List<SplineContainer>(GetComponentsInChildren<SplineContainer>());
         }
 
