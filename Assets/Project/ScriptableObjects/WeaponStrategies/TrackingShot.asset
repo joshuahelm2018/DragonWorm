@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TrackingShot
   m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.TrackingShot
   damage: 10
-  attackRate: 0.5
+  attackRate: 3
   projectileSpeed: 2.5
   projectileLifetime: 4
   projectilePrefab: {fileID: 2375249433010735738, guid: 78e8ddbd1fe9b9044b20efbadc104bb2, type: 3}
-  trackingSpeed: 5
+  trackingSpeed: 50
