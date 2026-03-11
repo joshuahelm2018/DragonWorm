@@ -25,7 +25,7 @@ namespace DragonWorm {
                 muzzleVfx.transform.forward = transform.forward;
                 muzzleVfx.transform.SetParent(parent);
 
-                StopAnimator(muzzleVfx);
+                StopVFX(muzzleVfx);
             }
         }
 
@@ -43,14 +43,14 @@ namespace DragonWorm {
                 ContactPoint2D contact = collision.GetContact(0);
                 var hitVfx = Instantiate(hitPrefab, contact.point, Quaternion.identity);
 
-                StopAnimator(hitVfx);
+                StopVFX(hitVfx);
 
             }
 
             Destroy(gameObject);
         }
 
-        private void StopAnimator(GameObject vfx) {
+        private void StopVFX(GameObject vfx) {
             Animator anim = null;
             float length = 0f;
             if (!vfx.TryGetComponent(out anim)) {
