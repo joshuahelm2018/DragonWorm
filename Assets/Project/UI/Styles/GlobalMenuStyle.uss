@@ -1,0 +1,38 @@
+.menu-root {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background-color: rgb(15, 15, 20);
+}
+
+.menu-title {
+    font-size: 48px;
+    unity-font-style: bold;
+
+    margin-bottom: 40px;
+
+    color: white;
+}
+
+.menu-buttons {
+    flex-direction: column;
+    gap: 12px;
+}
+
+Button {
+    width: 220px;
+    height: 50px;
+
+    font-size: 18px;
+
+    background-color: rgb(60, 60, 70);
+    color: white;
+
+    border-radius: 6px;
+}
+
+Button:hover {
+    background-color: rgb(90, 90, 100);
+}

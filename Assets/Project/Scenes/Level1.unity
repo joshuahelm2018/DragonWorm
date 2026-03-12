@@ -845,6 +845,94 @@ MonoBehaviour:
   - {fileID: 943435211}
   smoothing: 10
   multiplier: 1
+--- !u!1 &1490529743
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1490529745}
+  - component: {fileID: 1490529744}
+  - component: {fileID: 1490529747}
+  - component: {fileID: 1490529746}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1490529744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490529743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25576f061ae2f94887db780754a6112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.GameManager
+  mainMenuScene:
+    asset: {fileID: 102900000, guid: f0aa696541819db418f85ad555b6c6c1, type: 3}
+    guid: f0aa696541819db418f85ad555b6c6c1
+  gameOverScene:
+    asset: {fileID: 102900000, guid: 3dc6f03923d80e44b912ba8cbdc84e47, type: 3}
+    guid: 3dc6f03923d80e44b912ba8cbdc84e47
+  gameOverDuration: 3
+--- !u!4 &1490529745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490529743}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1490529746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490529743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 77e7a5940149330469f23c78a70804bd, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2bf2080a9114ad04b82fcb633d44b8e5, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &1490529747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490529743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f38ed197653a6c84d8817e0a492b8317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.GameUIController
 --- !u!1 &2119409002
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,10 +991,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1482366867444965047, guid: de47baaa166c3524790b6ace40c6e3a6, type: 3}
-      propertyPath: cameraFollow
-      value: 
-      objectReference: {fileID: 519420032}
     - target: {fileID: 6782696450251133826, guid: de47baaa166c3524790b6ace40c6e3a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -947,10 +1031,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8583119655083978535, guid: de47baaa166c3524790b6ace40c6e3a6, type: 3}
-      propertyPath: layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8603827965812441822, guid: de47baaa166c3524790b6ace40c6e3a6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -964,6 +1044,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1490529745}
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 260895430946027931}

@@ -160,6 +160,8 @@ GameObject:
   - component: {fileID: 3008596764057253715}
   - component: {fileID: 3960169541742200865}
   - component: {fileID: 8583119655083978535}
+  - component: {fileID: 4126397580242363609}
+  - component: {fileID: 4122110112463913508}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -240,8 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.PlayerController
   speed: 5
   smoothness: 0.1
-  leanAngle: 15
-  leanSpeed: 5
   model: {fileID: 1926191082751085202}
   cameraFollow: {fileID: 0}
   minX: -7
@@ -326,3 +326,30 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 14255573599034741a35607673fe4044, type: 2}
   attackPoint: {fileID: 158688295559985878}
   layer: 6
+--- !u!114 &4126397580242363609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603827965812441822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb69fff530bc584e89eb8ed831ffb18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.Player
+--- !u!114 &4122110112463913508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603827965812441822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e67ce4c9f462d4c93dd49fd8dd8052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.Life
+  maxHealth: 50
+  <Health>k__BackingField: 0
+  invincible: 0

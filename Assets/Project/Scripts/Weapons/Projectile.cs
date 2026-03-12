@@ -4,6 +4,7 @@ using UnityEngine;
 namespace DragonWorm {
     public class Projectile : MonoBehaviour {
         [SerializeField] float speed;
+        [SerializeField] int damage;
         [SerializeField] GameObject muzzlePrefab;
         [SerializeField] GameObject hitPrefab;
 
@@ -18,6 +19,11 @@ namespace DragonWorm {
         public void SetParent(Transform parent) {
             this.parent = parent;
         }
+
+        public void SetDamage(int damage) {
+            this.damage = damage;
+        }
+        
 
         private void Start() {
             if (muzzlePrefab != null) {
@@ -45,6 +51,10 @@ namespace DragonWorm {
 
                 StopVFX(hitVfx);
 
+            }
+
+            if (collision.gameObject.TryGetComponent(out Life victim)) {
+                victim.TakeDamage(damage);
             }
 
             Destroy(gameObject);

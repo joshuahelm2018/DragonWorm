@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Project/UI/Styles/GameUIStyle.uss?fileID=7433441132597879392&amp;guid=cdf8f4d73e9823b4b86ba71906b79fdf&amp;type=3#GameUIStyle"/>
+    <ui:VisualElement class="game-ui-root">
+        <ui:VisualElement class="health-panel">
+            <ui:Label text="HP" class="health-label"/>
+            <ui:VisualElement class="health-bar-bg">
+                <ui:VisualElement name="HealthFill" class="health-bar-fill"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
