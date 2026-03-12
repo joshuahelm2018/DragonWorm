@@ -1,7 +1,7 @@
+This project is a basic sidescrolling Unity game that demonstrates:
+
 Git Workflow Demonstration
-
-This project intentionally demonstrates:
-
+• Github Actions
 • Feature branching
 • Merging
 • Rebasing
