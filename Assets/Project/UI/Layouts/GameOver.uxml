@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Project/UI/Styles/GlobalMenuStyle.uss?fileID=7433441132597879392&amp;guid=a7d33aa2e39e13c4a80d1500199f00f7&amp;type=3#GlobalMenuStyle"/>
+    <ui:VisualElement class="menu-root" style="background-color: rgba(15, 15, 20, 0.3);">
+        <ui:Label text="Game Over" class="menu-title"/>
+    </ui:VisualElement>
+</ui:UXML>

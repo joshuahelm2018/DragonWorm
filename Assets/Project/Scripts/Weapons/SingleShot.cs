@@ -10,6 +10,7 @@ namespace DragonWorm {
 
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
             projectileComponent.SetSpeed(projectileSpeed);
+            projectileComponent.SetDamage(Damage);
 
             Destroy(projectile, projectileSpeed);
         }

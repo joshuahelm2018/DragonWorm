@@ -9,7 +9,10 @@ namespace DragonWorm {
         Transform target;
 
         public override void Initialize() {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
+            GameObject p = GameObject.FindGameObjectWithTag("Player");
+            if (p != null) {
+                target = p.transform;
+            }
         }
 
         public override void Attack(Transform attackPoint, LayerMask layer) {
@@ -18,10 +21,14 @@ namespace DragonWorm {
             projectile.layer = layer;
 
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
+            projectileComponent.SetDamage(Damage);
             projectileComponent.SetSpeed(projectileSpeed);
             projectile.GetComponent<Projectile>().Callback = () => {
                 Vector3 currentDir = projectile.transform.right;
-                Vector3 targetDir = (target.position - projectile.transform.position).normalized;
+                Vector3 targetDir = projectile.transform.right;
+                if (target != null) {
+                    targetDir = (target.position - projectile.transform.position).normalized;
+                }
 
                 Vector3 newDir = Vector3.RotateTowards(
                     currentDir,

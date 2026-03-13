@@ -4,8 +4,6 @@ namespace DragonWorm {
     public class PlayerController : MonoBehaviour {
         [SerializeField] float speed = 5f;
         [SerializeField] float smoothness = 0.1f;
-        [SerializeField] float leanAngle = 15f;
-        [SerializeField] float leanSpeed = 5f;
 
         [SerializeField] GameObject model;
 
@@ -23,6 +21,10 @@ namespace DragonWorm {
 
         private void Start() {
             input = GetComponent<InputReader>();
+
+            if (cameraFollow == null) {
+                cameraFollow = Camera.main.transform;
+            }
         }
 
         private void Update() {
@@ -37,10 +39,6 @@ namespace DragonWorm {
             targetPosition.y = Mathf.Clamp(targetPosition.y, minPlayerY, maxPlayerY);
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, smoothness);
-
-            //float targetRotationAngle = -input.Move.y * leanAngle;
-
-
         }
     }
 }

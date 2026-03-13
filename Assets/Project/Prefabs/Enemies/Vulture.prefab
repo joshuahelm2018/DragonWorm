@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 8933422595076437573}
   - component: {fileID: 3552672707571651946}
   - component: {fileID: 7348051939300342480}
+  - component: {fileID: 1185395167726710265}
+  - component: {fileID: 2850757105037559466}
   m_Layer: 7
   m_Name: Vulture
   m_TagString: Untagged
@@ -169,6 +171,31 @@ MonoBehaviour:
   weaponStrategy: {fileID: 11400000, guid: 030dd7fc8d07e4c44b47c9b3dd4ec67c, type: 2}
   attackPoint: {fileID: 4971488286249185254}
   layer: 7
+--- !u!114 &1185395167726710265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513900898990780117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ada8e15d3120f6478e46fbf0474a1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.Enemy
+--- !u!114 &2850757105037559466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513900898990780117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29e67ce4c9f462d4c93dd49fd8dd8052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.Life
+  maxHealth: 10
 --- !u!1 &8585678687128777393
 GameObject:
   m_ObjectHideFlags: 0
