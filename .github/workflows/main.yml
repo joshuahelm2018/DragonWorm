@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -37,3 +39,20 @@ jobs:
         with:
           name: WindowsBuild
           path: build
+
+      - name: Debug build output
+        run: |
+            echo "Current directory:"
+            pwd
+            echo "Listing files:"
+            ls -R
+
+      - name: Create HitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v4
+        with:
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          files: build/**/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
