@@ -46,10 +46,23 @@ jobs:
 
       - name: Debug build output
         run: |
-            echo "Current directory:"
-            pwd
-            echo "Listing files:"
-            ls -R
+            echo "=== Build Directory ==="
+            ls build || true
+
+            echo "=== Windows Build Directory ==="
+            ls build/WindowsBuild || true
+
+            echo "=== Executables ==="
+            find build -name "*.exe" || true
+
+            echo "=== Top-level files in build ==="
+            find build -maxdepth 2 -type f | head -n 50
+
+      - name: Package build (zip)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cd build/WindowsBuild
+          zip -r ../../DragonWorm_${{ github.ref_name }}.zip .
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -57,6 +70,6 @@ jobs:
         with:
           name: Release ${{ github.ref_name }}
           tag_name: ${{ github.ref_name }}
-          files: build/**/*
+          files: DragonWorm_${{ github.ref_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
