@@ -50,7 +50,7 @@ jobs:
             ls build || true
 
             echo "=== Windows Build Directory ==="
-            ls build/WindowsBuild || true
+            ls build/StandaloneWindows64 || true
 
             echo "=== Executables ==="
             find build -name "*.exe" || true

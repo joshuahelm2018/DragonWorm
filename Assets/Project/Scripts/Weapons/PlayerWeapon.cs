@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DragonWorm.Input;
+using UnityEngine;
 
 namespace DragonWorm {
     public class PlayerWeapon : Weapon {

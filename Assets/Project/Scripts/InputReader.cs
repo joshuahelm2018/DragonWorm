@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 
-namespace DragonWorm {
+namespace DragonWorm.Input {
     [RequireComponent(typeof(PlayerInput))]
     public class InputReader : MonoBehaviour {
         PlayerInput playerInput;
