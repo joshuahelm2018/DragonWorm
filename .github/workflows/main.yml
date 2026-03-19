@@ -6,13 +6,48 @@ on:
     branches: [ main ]
     tags:
       - 'v*'
+  pull_request:
 
 permissions: 
   contents: write
 
-
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        testMode: [ EditMode, PlayMode ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+        - name: Cache Library
+          uses: actions/cache@v3
+          with:
+            path: Library
+            key: Library-${{ matrix.testMode }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+            restore-keys: |
+              Library-
+
+          - name: Run Unity Tests
+            uses: game-ci/unity-test-runner@v4
+            with:
+              unityVersion: auto
+              testMode: ${{ matrix.testMode }}
+            env:
+              UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+              UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+              UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
+          - name: Upload Test Results
+            uses: actions/upload-artifact@v4
+            with:
+              name: TestResults-${{ matrix.testMode }}
+              path: artifacts
   build:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -50,7 +85,7 @@ jobs:
             ls build || true
 
             echo "=== Windows Build Directory ==="
-            ls build/WindowsBuild || true
+            ls build/StandaloneWindows64 || true
 
             echo "=== Executables ==="
             find build -name "*.exe" || true

@@ -11,12 +11,25 @@ namespace DragonWorm {
 
         [SerializeField] bool invincible = false;
 
-        public bool IsAlive => Health >= 0;
+        public bool IsAlive => Health > 0;
 
         public event Action OnDie;
 
+        public Life(int amount) {
+            maxHealth = amount;
+            Initialize();
+        }
+
         void Awake() {
-        Health = maxHealth;
+            Initialize();
+        }
+
+        public void Initialize() {
+            Health = maxHealth;
+        }
+
+        public void SetHealth(int amount) {
+            Health = amount;
         }
 
         public void TakeDamage(int amount) {

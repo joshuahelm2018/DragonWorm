@@ -1,10 +1,15 @@
 using UnityEngine;
 
 namespace DragonWorm {
+    [RequireComponent(typeof(Life))]
     public class Actor : MonoBehaviour {
         public Life Life { get; protected set; }
 
         protected virtual void Awake() {
+            Initialize();
+        }
+
+        public virtual void Initialize() {
             Life = GetComponent<Life>();
         }
 
