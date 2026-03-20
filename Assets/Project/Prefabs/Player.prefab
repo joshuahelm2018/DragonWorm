@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8583119655083978535}
   - component: {fileID: 4126397580242363609}
   - component: {fileID: 4122110112463913508}
+  - component: {fileID: 7152426354362812358}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -235,7 +236,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8603827965812441822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a1cb9f2c7d2d564982863189be24077, type: 3}
   m_Name: 
@@ -353,3 +354,22 @@ MonoBehaviour:
   maxHealth: 50
   <Health>k__BackingField: 0
   invincible: 0
+--- !u!114 &7152426354362812358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603827965812441822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5dbc3aae28950c4cb066223a5dd0033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  bodySegmentPrefab: {fileID: 5283903945131938431, guid: cf85f43eed4ec064c93314611bb54ebf, type: 3}
+  moveSpeed: 6
+  turnSpeed: 450
+  deadzoneRadius: 0.5
+  segmentSpacing: 1
+  knotResolution: 0.1
+  initialSize: 5
