@@ -6,15 +6,20 @@ using UnityEngine.InputSystem;
 using System;
 
 namespace DragonWorm {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class SnakeManager : MonoBehaviour {
         private SplineContainer path;
-        [SerializeField] private GameObject bodySegmentPrefab;
-        private List<GameObject> activeSegments = new List<GameObject>();
+        [SerializeField] private BodySegment bodySegmentPrefab;
+        private List<BodySegment> activeSegments = new List<BodySegment>();
+        private Rigidbody2D rb;
 
         [Header("Movement Settings")]
-        [SerializeField] private float moveSpeed = 10f;
-        [SerializeField] private float turnSpeed = 450f; // Degrees per second
-        [SerializeField] private float deadzoneRadius = 0.25f;
+        [SerializeField] private float smoothTime = 0.3f;
+        [SerializeField] private float maxSpeed = 10f;
+        [SerializeField, Tooltip("Degrees per second")] private float turnSpeed = 450f;
+        [Space]
+        [SerializeField, Header("Start braking")] private float slowdownRadius = 3f;
+        [SerializeField, Header("Stop")] private float deadzoneRadius = 0.25f;
 
         [Header("Snake Settings")]
         [SerializeField] private float segmentSpacing = 1.0f;
@@ -22,9 +27,16 @@ namespace DragonWorm {
         [SerializeField] private int initialSize = 5;
 
         private Vector3 targetWorldPos;
+        private float currentSpeed;
+        private float speedVelocity;
         private bool isMoving = false;
 
         private void Start() {
+            rb = GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
             InitializeSpline();
             CreateInitialBody();
         }
@@ -40,15 +52,13 @@ namespace DragonWorm {
 
         void CreateInitialBody() {
             for (int i = 0; i < initialSize; i++) {
-                GameObject segment = Instantiate(bodySegmentPrefab, transform.position, Quaternion.identity);
+                BodySegment segment = Instantiate(bodySegmentPrefab, transform.position, Quaternion.identity);
                 activeSegments.Add(segment);
             }
         }
 
         private void Update() {
             UpdateTargetPosition();
-            MoveHead();
-            UpdateSplinePath();
         }
 
         private void UpdateTargetPosition() {
@@ -59,22 +69,41 @@ namespace DragonWorm {
             targetWorldPos.z = 0;
         }
 
+        private void FixedUpdate() {
+            MoveHead();
+            UpdateSplinePath();
+            PositionBodySegments();
+            TrimSpline();
+        }
+
         void MoveHead() {
-            Vector3 vectorToTarget = targetWorldPos - transform.position;
-            float distanceToTarget = vectorToTarget.magnitude;
+            Vector3 vectorToTarget = targetWorldPos - (Vector3)rb.position;
+            float distance = vectorToTarget.magnitude;
 
-            if (distanceToTarget > deadzoneRadius) {
-                isMoving = true;
-
+            if (distance > deadzoneRadius) {
                 // Calculate the rotation needed to face the mouse
-                float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90f;
-                Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                float targetAngle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+                Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
 
-                // Smoothly rotate toward that target
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+                float rotStep = turnSpeed * Time.fixedDeltaTime;
+                rb.MoveRotation(Quaternion.RotateTowards(transform.rotation, targetRotation, rotStep));
+            }
 
-                // Always move forward in the direction the head is currently facing
-                transform.position += transform.up * moveSpeed * Time.deltaTime;
+            float targetSpeed = 0f;
+
+            if (distance > slowdownRadius) {
+                targetSpeed = maxSpeed;
+            } else if (distance > deadzoneRadius) {
+                float t = (distance - deadzoneRadius) / (slowdownRadius - deadzoneRadius);
+                targetSpeed = maxSpeed * t;
+            }
+
+            currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, smoothTime);
+
+            if (currentSpeed > 0.01f) {
+                isMoving = true;
+                Vector2 moveStep = (Vector2)transform.right * currentSpeed * Time.fixedDeltaTime;
+                rb.MovePosition(rb.position + moveStep);
             } else {
                 isMoving = false;
             }
@@ -96,11 +125,6 @@ namespace DragonWorm {
             }
         }
 
-        private void LateUpdate() {
-            PositionBodySegments();
-            TrimSpline();
-        }
-
         void PositionBodySegments() {
             float totalSplineLength = path.Spline.GetLength();
 
@@ -115,12 +139,12 @@ namespace DragonWorm {
                     float3 pos, tangent, up;
                     path.Evaluate(targetDistance / totalSplineLength, out pos, out tangent, out up);
 
-                    activeSegments[i].transform.position = path.transform.TransformPoint((Vector3)pos);
+                    Vector3 worldPos = path.transform.TransformPoint((Vector3)pos);
 
-                    // Ensure the segment faces the direction of the path
-                    if (!tangent.Equals(float3.zero)) {
-                        activeSegments[i].transform.rotation = Quaternion.LookRotation(Vector3.forward, tangent);
-                    }
+                    float angle = Mathf.Atan2(tangent.y, tangent.x) * Mathf.Rad2Deg;
+                    Quaternion worldRot = Quaternion.Euler(0, 0, angle);
+
+                    activeSegments[i].MoveTo(worldPos, worldRot);
                 }
             }
         }
@@ -134,6 +158,13 @@ namespace DragonWorm {
             while (path.Spline.Count > 2 && path.Spline.GetLength() > totalNeededLength + 2.0f) {
                 path.Spline.RemoveAt(0);
             }
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, deadzoneRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, slowdownRadius);
         }
     }
 }
