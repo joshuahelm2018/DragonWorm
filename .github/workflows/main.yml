@@ -50,6 +50,7 @@ jobs:
           name: TestResults-${{ matrix.testMode }}
           path: artifacts
   build:
+    if: github.event_name == 'push'
     needs: test
     runs-on: ubuntu-latest
 
