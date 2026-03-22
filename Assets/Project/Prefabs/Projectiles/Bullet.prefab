@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragonWorm.Projectile
   speed: 5
+  damage: 0
   muzzlePrefab: {fileID: 0}
   hitPrefab: {fileID: 8794701561524619272, guid: 71635124e5f1fd44d8a47e69e6544d5f, type: 3}
 --- !u!61 &7923163497478560659
@@ -161,7 +162,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

@@ -40,7 +40,9 @@ namespace DragonWorm {
                 projectile.transform.right = newDir;
             };
 
-            Destroy(projectile, projectileSpeed);
+            if (projectileLifetime > 0) {
+                Destroy(projectile, projectileLifetime);
+            }
         }
     }
 }

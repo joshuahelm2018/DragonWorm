@@ -53,6 +53,9 @@ namespace DragonWorm {
         void CreateInitialBody() {
             for (int i = 0; i < initialSize; i++) {
                 BodySegment segment = Instantiate(bodySegmentPrefab, transform.position, Quaternion.identity);
+                if (TryGetComponent(out Life life)) {
+                    segment.Initialize(life);
+                }
                 activeSegments.Add(segment);
             }
         }
