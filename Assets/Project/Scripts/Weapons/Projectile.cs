@@ -23,7 +23,6 @@ namespace DragonWorm {
         public void SetDamage(int damage) {
             this.damage = damage;
         }
-        
 
         private void Start() {
             if (muzzlePrefab != null) {
@@ -45,16 +44,32 @@ namespace DragonWorm {
         }        
 
         private void OnCollisionEnter2D(Collision2D collision) {
+            ContactPoint2D contact = collision.GetContact(0);
+            Collide(contact.point, collision: collision);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider) {
+            Collide(transform.position, collider: collider);
+        }
+
+        private void Collide(Vector3 point, Collision2D? collision=null, Collider2D? collider=null) {
             if (hitPrefab != null) {
-                ContactPoint2D contact = collision.GetContact(0);
-                var hitVfx = Instantiate(hitPrefab, contact.point, Quaternion.identity);
+                var hitVfx = Instantiate(hitPrefab, point, Quaternion.identity);
 
                 StopVFX(hitVfx);
-
             }
 
-            if (collision.gameObject.TryGetComponent(out Life victim)) {
-                victim.TakeDamage(damage);
+            GameObject hitObj = null;
+            if (collision != null) {
+                hitObj = collision.gameObject;
+            } else if (collider != null) {
+                hitObj = collider.gameObject;
+            }
+
+            if (hitObj != null) {
+                if (hitObj.TryGetComponent(out IDamageable victim)) {
+                    victim.TakeDamage(damage);
+                }
             }
 
             Destroy(gameObject);

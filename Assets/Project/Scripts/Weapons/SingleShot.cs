@@ -12,7 +12,9 @@ namespace DragonWorm {
             projectileComponent.SetSpeed(projectileSpeed);
             projectileComponent.SetDamage(Damage);
 
-            Destroy(projectile, projectileSpeed);
+            if (projectileLifetime > 0) {
+                Destroy(projectile, projectileLifetime);
+            }
         }
     }
 }
