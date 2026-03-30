@@ -2,7 +2,7 @@
 
 namespace DragonWorm {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BodySegment : MonoBehaviour, IDamageable {
+    public class BodySegment : MonoBehaviour {
         Rigidbody2D rb;
         Life life;
 

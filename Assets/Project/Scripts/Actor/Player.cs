@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DragonWorm {
     public class Player : Actor {
-        [SerializeField] private int smashDamage = 50;
+        [SerializeField] private int collideDamage = 50;
 
         protected override void HandleDie() {
             GameManager.Instance.HandlePlayerDied();
@@ -10,27 +10,18 @@ namespace DragonWorm {
             base.HandleDie();
         }
 
-        protected override void OnCollisionEnter2D(Collision2D collision) {
-            Collide(transform.position, collision: collision);
-        }
-
-        protected override void OnTriggerEnter2D(Collider2D collider) {
-            Collide(transform.position, collider: collider);
-        }
-
-        private void Collide(Vector3 point, Collision2D? collision = null, Collider2D? collider = null) {
-            GameObject hitObj = null;
-            if (collision != null) {
-                hitObj = collision.gameObject;
-            } else if (collider != null) {
-                hitObj = collider.gameObject;
-            }
-
+        protected override void DoCollision(GameObject hitObj, Vector3 point, Collision2D? collision = null, Collider2D? collider = null) {
             if (hitObj != null) {
-                if (hitObj.TryGetComponent(out ISmashable victim)) {
-                    victim.SmashInto(smashDamage);
+                if (hitObj.TryGetComponent(out Edible food)) {
+                    Eat(food);
+                } else if (hitObj.TryGetComponent(out Damageable victim)) {
+                    victim.TakeDamage(collideDamage);
                 }
             }
+        }
+
+        protected void Eat(Edible food) {
+            food.EatenBy(this);
         }
     }
 }

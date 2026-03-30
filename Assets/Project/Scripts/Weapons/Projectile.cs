@@ -67,7 +67,7 @@ namespace DragonWorm {
             }
 
             if (hitObj != null) {
-                if (hitObj.TryGetComponent(out IDamageable victim)) {
+                if (hitObj.TryGetComponent(out Damageable victim)) {
                     victim.TakeDamage(damage);
                 }
             }

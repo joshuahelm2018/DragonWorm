@@ -41,6 +41,10 @@ namespace DragonWorm {
             }
         }
 
+        public void TakeMaxDamage() {
+            TakeDamage(Health);
+        }
+
         void Die() {
             if (OnDie != null) {
                 OnDie.Invoke();
